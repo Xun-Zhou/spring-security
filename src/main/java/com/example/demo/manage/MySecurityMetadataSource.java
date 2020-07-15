@@ -19,14 +19,14 @@ import java.util.List;
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     /**
-     * 此方法判定用户请求的url 是否在权限表中，如果在权限表中，则返回给 MyAccessDecisionManager的decide 方法，
-     * 如果不在权限表中则放行。
+     * 此方法判定用户请求的url+method是否在权限表中，如果在权限表中，则返回给MyAccessDecisionManager的decide方法，
+     * 如果不在权限表中设置默认权限
      */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         String url = ((FilterInvocation) o).getRequestUrl();
         String method = ((FilterInvocation) o).getRequest().getMethod();
-        //REST风格  根据方法判断权限
+        //REST风格 根据请求地址 + 请求方式判断
         String authPath = url + " " + method;
         PathMatcher pathMatcher = new AntPathMatcher();
         for (PermissionInfo permissionInfo : PermissionServiceImpl.PERMISSIONS) {

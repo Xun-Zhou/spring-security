@@ -32,7 +32,7 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        //解决同一请求，两次经过过滤器  原因：过滤器被加载WebSecurityConfig和spring都加载了
+        //解决同一请求，两次经过过滤器 原因：过滤器被加载WebSecurityConfig和spring都加载了
         if (request.getAttribute(FILTER_APPLIED) != null) {
             chain.doFilter(request, response);
             return;

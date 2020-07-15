@@ -16,7 +16,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
         for (ConfigAttribute configAttribute : configAttributes) {
-            // 请求路径不在权限配置列表中
+            // 默认权限-请求路径不在权限配置列表中
             if ("ROLE_DEF".equals(configAttribute.getAttribute())) {
                 return;
             }
